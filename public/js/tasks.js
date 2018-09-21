@@ -44,20 +44,13 @@ $(document).ready(function(){
         console.log("click image");
     });
     function simulateClick() {
-        var event = new MouseEvent('click', {
+        let event = new MouseEvent('click', {
             'view': window,
             'bubbles': true,
             'cancelable': true
         });
-        var cb = document.getElementById('image');
-        var canceled = !cb.dispatchEvent(event);
-        if (canceled) {
-            // A handler called preventDefault.
-            console.log("canceled");
-        } else {
-            // None of the handlers called preventDefault.
-            console.log("not canceled");
-        }
+        let cb = document.getElementById('image');
+        cb.dispatchEvent(event);
     }
 
     $('#createTaskButton').on('click', function() {
