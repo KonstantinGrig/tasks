@@ -22,33 +22,33 @@ class TaskRepositoryTest extends TestCase
     public function testInsert()
     {
         $task = new Task();
-        $task->setUserName('Jon123');
-        $task->setEmail('jon1@exmple.com');
-        $task->setText('text1');
-        $task->setImagePath('/tmp');
-        $task->setExecuted(true);
+        $task->userName = 'Jon123';
+        $task->email = 'jon1@exmple.com';
+        $task->text = 'text1';
+        $task->imagePath = '/tmp';
+        $task->executed = true;
         $repository = new TaskRepository();
         $repository->insert($task);
 
         $task = $repository->findById(1);
 
-        $this->assertEquals('Jon123',$task->getUserName());
+        $this->assertEquals('Jon123',$task->userName);
     }
 
     public function testFindById()
     {
         $task = new Task();
-        $task->setUserName('Jon123');
-        $task->setEmail('jon1@exmple.com');
-        $task->setText('text1');
-        $task->setImagePath('/tmp');
-        $task->setExecuted(true);
+        $task->userName = 'Jon123';
+        $task->email = 'jon1@exmple.com';
+        $task->text = 'text1';
+        $task->imagePath = '/tmp';
+        $task->executed = true;
         $repository = new TaskRepository();
         $repository->insert($task);
         $repository = new TaskRepository();
         $task = $repository->findById(1);
 
-        $this->assertEquals('Jon123',$task->getUserName());
+        $this->assertEquals('Jon123',$task->userName);
     }
 
     public function testOrdered()
@@ -56,71 +56,71 @@ class TaskRepositoryTest extends TestCase
         $repository = new TaskRepository();
 
         $task = new Task();
-        $task->setUserName('Jon1');
-        $task->setEmail('jon1@exmple.com');
-        $task->setText('text1');
-        $task->setImagePath('/tmp');
-        $task->setExecuted(true);
+        $task->userName = 'Jon1';
+        $task->email = 'jon1@exmple.com';
+        $task->text = 'text1';
+        $task->imagePath = '/tmp';
+        $task->executed = true;
         $repository->insert($task);
 
         $task = new Task();
-        $task->setUserName('Jon2');
-        $task->setEmail('jon2@exmple.com');
-        $task->setText('text2');
-        $task->setImagePath('/tmp');
-        $task->setExecuted(false);
+        $task->userName = 'Jon2';
+        $task->email = 'jon2@exmple.com';
+        $task->text = 'text1';
+        $task->imagePath = '/tmp';
+        $task->executed = true;
         $repository->insert($task);
 
         $task = new Task();
-        $task->setUserName('Jon3');
-        $task->setEmail('jon3@exmple.com');
-        $task->setText('text3');
-        $task->setImagePath('/tmp');
-        $task->setExecuted(true);
+        $task->userName = 'Jon3';
+        $task->email = 'jon3@exmple.com';
+        $task->text = 'text1';
+        $task->imagePath = '/tmp';
+        $task->executed = true;
         $repository->insert($task);
 
         $task = new Task();
-        $task->setUserName('Jon4');
-        $task->setEmail('jon4@exmple.com');
-        $task->setText('text4');
-        $task->setImagePath('/tmp');
-        $task->setExecuted(false);
+        $task->userName = 'Jon4';
+        $task->email = 'jon4@exmple.com';
+        $task->text = 'text1';
+        $task->imagePath = '/tmp';
+        $task->executed = true;
         $repository->insert($task);
 
         $taskList = $repository->ordered("userName", "ASC", 2, 2);
         $this->assertEquals(2,count($taskList));
-        $this->assertEquals('Jon3', $taskList[0]->getUserName());
+        $this->assertEquals('Jon3', $taskList[0]->userName);
 
         $taskList = $repository->ordered("userName", "DESC", 3, 1);
         $this->assertEquals(1,count($taskList));
-        $this->assertEquals('Jon1', $taskList[0]->getUserName());
+        $this->assertEquals('Jon1', $taskList[0]->userName);
     }
 
     public function testTotalRecords()
     {
         $repository = new TaskRepository();
         $task = new Task();
-        $task->setUserName('Jon1');
-        $task->setEmail('jon1@exmple.com');
-        $task->setText('text1');
-        $task->setImagePath('/tmp');
-        $task->setExecuted(true);
+        $task->userName = 'Jon1';
+        $task->email = 'jon1@exmple.com';
+        $task->text = 'text1';
+        $task->imagePath = '/tmp';
+        $task->executed = true;
         $repository->insert($task);
 
         $task = new Task();
-        $task->setUserName('Jon2');
-        $task->setEmail('jon2@exmple.com');
-        $task->setText('text2');
-        $task->setImagePath('/tmp');
-        $task->setExecuted(false);
+        $task->userName = 'Jon2';
+        $task->email = 'jon2@exmple.com';
+        $task->text = 'text1';
+        $task->imagePath = '/tmp';
+        $task->executed = true;
         $repository->insert($task);
 
         $task = new Task();
-        $task->setUserName('Jon3');
-        $task->setEmail('jon3@exmple.com');
-        $task->setText('text3');
-        $task->setImagePath('/tmp');
-        $task->setExecuted(true);
+        $task->userName = 'Jon3';
+        $task->email = 'jon3@exmple.com';
+        $task->text = 'text1';
+        $task->imagePath = '/tmp';
+        $task->executed = true;
         $repository->insert($task);
 
         $totalRecords = $repository->totalRecords();

@@ -10,7 +10,6 @@ namespace App\Model;
 
 
 use App\Core\Util;
-use phpDocumentor\Reflection\Types\Object_;
 
 class BaseModel
 {
@@ -70,24 +69,6 @@ class BaseModel
     }
 
     /**
-     * Returns $entity
-     *
-     * @return object
-     */
-    public function getEntity() {
-        return $this->entity;
-    }
-
-    /**
-     * Returns $entityList
-     *
-     * @return array
-     */
-    public function getEntityList() {
-        return $this->entityList;
-    }
-
-    /**
      * @return array
      */
     public function getErrors()
@@ -102,8 +83,7 @@ class BaseModel
         if ($entity != null) {
             $validators = $entity->getValidators();
             foreach ($validators as $name => $value) {
-                $getProperty= "get".ucfirst($name);
-                if (!$value["validator"]->validate($entity->$getProperty())) {
+                if (!$value["validator"]->validate($entity->$name)) {
                     $result = false;
                     $this->errors["entity"][$name] = $value["message"];
                 }

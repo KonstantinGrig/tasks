@@ -15,11 +15,11 @@ class TaskRepository
         $insert = "INSERT INTO task (userName, email, text, imagePath, executed) 
                 VALUES (:userName, :email, :text, :imagePath, :executed)";
         $stmt = $db->prepare($insert);
-        $userName = $task->getUserName();
-        $email = $task->getEmail();
-        $text = $task->getText();
-        $imagePath = $task->getImagePath();
-        $executed = $task->getExecuted();
+        $userName = $task->userName;
+        $email = $task->email;
+        $text = $task->text;
+        $imagePath = $task->imagePath;
+        $executed = $task->executed;
         $stmt->bindParam(':userName', $userName);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':text', $text);
@@ -66,9 +66,9 @@ class TaskRepository
         $db = Config::getDb();
         $updateSql = "UPDATE task SET text = :text, executed = :executed WHERE id = :id";
         $stmt = $db->prepare($updateSql);
-        $text = $task->getText();
-        $executed = $task->getExecuted();
-        $id = $task->getId();
+        $text = $task->text;
+        $executed = $task->executed;
+        $id = $task->id;
         $stmt->bindParam(':text', $text);
         $stmt->bindParam(':executed', $executed);
         $stmt->bindParam(':id', $id);

@@ -67,5 +67,11 @@ class Routes
                 "action" => "taskEdit"
             ]
         ],
+        "/deny" => [
+            "GET" => [
+                "controller" => "TaskController",
+                "action" => "deny"
+            ]
+        ],
     ];
 }

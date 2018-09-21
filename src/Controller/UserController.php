@@ -22,7 +22,7 @@ class UserController extends BaseController
         $model = new UserModel();
         $model->resolveEntityFromPost($request);
         if ($model->validate()) {
-            Util::setSessionUser($model->getEntity()->userName);
+            Util::setSessionUser($model->entity->userName);
             Util::redirect('/');
         }
         return new Response($this->twig->render('login.html', ["model" => $model]));

@@ -11,81 +11,32 @@ class Task
     /**
      * @var int
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      */
-    private $userName;
+    public $userName;
 
     /**
      * @var string
      */
-    private $email;
+    public $email;
 
     /**
      * @var string
      */
-    private $text;
+    public $text;
 
     /**
      * @var string
      */
-    private $imagePath;
+    public $imagePath;
 
     /**
      * @var bool
      */
-    private $executed = false;
-
-
-    public function getId() {
-        return (int)$this->id;
-    }
-
-    public function setId($id) {
-        $this->id = (int)$id;
-    }
-
-    public function getUserName() {
-        return $this->userName;
-    }
-
-    public function setUserName($userName) {
-        $this->userName = $userName;
-    }
-
-    public function getEmail() {
-        return $this->email;
-    }
-
-    public function setEmail($email) {
-        $this->email = $email;
-    }
-
-    public function getText() {
-        return $this->text;
-    }
-
-    public function setText($text) {
-        $this->text = $text;
-    }
-
-    public function getExecuted() {
-        return (bool)$this->executed;
-    }
-
-    public function setExecuted($executed) {
-        $this->executed = (bool)$executed;
-    }
-
-    public function getImagePath() {
-        return $this->imagePath;
-    }
-
-    public function setImagePath($imagePath) {
-        $this->imagePath = $imagePath;
-    }
+    public $executed = false;
 
     /**
      * @return array

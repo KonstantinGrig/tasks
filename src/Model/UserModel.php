@@ -35,8 +35,8 @@ class UserModel extends BaseModel
     public function validate():bool
     {
         $res = false;
-        if (isset($this->getEntity()->userName) && (isset($this->getEntity()->userName))
-            && $this->getEntity()->userName == self::ADMIN_NAME && $this->getEntity()->password == self::ADMIN_PASSWORD) {
+        if (isset($this->entity->userName) && (isset($this->entity->userName))
+            && $this->entity->userName == self::ADMIN_NAME && $this->entity->password == self::ADMIN_PASSWORD) {
             $res = true;
         } else {
             $this->errors["error"] = "Неверное имя или пароль";

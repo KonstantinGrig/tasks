@@ -79,7 +79,7 @@ $(document).ready(function(){
             }
         })
             .done(function( data ) {
-                window.location.href = "/taskList";
+                window.location.href = "/";
             })
             .fail(function(data) {
                 showErrors(JSON.parse(data.responseText));

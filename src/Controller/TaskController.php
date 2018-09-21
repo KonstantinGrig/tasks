@@ -42,6 +42,10 @@ class TaskController extends BaseController
 
     public function taskEditForm(Request $request): Response
     {
+        $currentUser = Util::getSessionUser();
+        if ($currentUser != 'admin') {
+            Util::redirect('/deny');
+        }
         if (!$request->queryArray['id']) {
             Util::redirect('/');
         }
@@ -53,14 +57,17 @@ class TaskController extends BaseController
     public function taskEdit(Request $request): Response
     {
         $currentUser = Util::getSessionUser();
-        if ($currentUser == 'admin') {
-            $model = new TaskModel();
-            $model->fillModelForTaskUpdate($request->post);
-            $model->updateEntityFromModel();
+        if ($currentUser != 'admin') {
+            Util::redirect('/deny');
         }
+        $model = new TaskModel();
+        $model->fillModelForTaskUpdate($request->post);
+        $model->updateEntityFromModel();
         Util::redirect('/');
     }
 
-
-
+    public function deny(Request $request): Response
+    {
+        return new Response($this->twig->render('deny.html', []));
+    }
 }

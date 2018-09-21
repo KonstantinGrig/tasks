@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Редактирование задачи{% endblock %}
+
+{% block content %}
+<div class="form-task">
+    <a href="/">Назад к списку</a>
+    <h1>Это запрещено</h1>
+    <div class="alert alert-danger" role="alert">
+        Редактирование разрешено только админу
+    </div>
+</div>
+
+{% endblock %}

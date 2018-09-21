@@ -73,8 +73,8 @@ class TaskModel extends BaseModel implements ModelInterface
             move_uploaded_file($tmpName, $uploadfile);
         }
 
-        $entity = $this->getEntity();
-        $entity->setImagePath($imageUrl);
+        $entity = $this->entity;
+        $entity->imagePath = $imageUrl;
         $taskRepository = new TaskRepository();
         $taskRepository->insert($entity);
     }
@@ -117,12 +117,12 @@ class TaskModel extends BaseModel implements ModelInterface
             $this->fillModelById($post['id']);
             if (isset($this->entity)) {
                 if ($post['text']) {
-                    $this->entity->setText($post['text']);
+                    $this->entity->text = $post['text'];
                 }
                 if ($post['executed']) {
-                    $this->entity->setExecuted(true);
+                    $this->entity->executed = true;
                 } else {
-                    $this->entity->setExecuted(false);
+                    $this->entity->executed = false;
                 }
             }
         }
