@@ -43,7 +43,7 @@ class TaskController extends BaseController
     public function taskEditForm(Request $request): Response
     {
         if (!$request->queryArray['id']) {
-            Util::redirect('/taskList');
+            Util::redirect('/');
         }
         $model = new TaskModel();
         $model->fillModelById($request->queryArray['id']);
@@ -58,7 +58,7 @@ class TaskController extends BaseController
             $model->fillModelForTaskUpdate($request->post);
             $model->updateEntityFromModel();
         }
-        Util::redirect('/taskList');
+        Util::redirect('/');
     }
 
 

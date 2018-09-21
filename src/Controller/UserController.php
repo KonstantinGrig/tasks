@@ -23,7 +23,7 @@ class UserController extends BaseController
         $model->resolveEntityFromPost($request);
         if ($model->validate()) {
             Util::setSessionUser($model->getEntity()->userName);
-            Util::redirect('/taskList');
+            Util::redirect('/');
         }
         return new Response($this->twig->render('login.html', ["model" => $model]));
     }
@@ -31,6 +31,6 @@ class UserController extends BaseController
     public function logout(Request $request): Response
     {
             Util::setSessionUser(Util::USER_ANONYMOUS);
-            Util::redirect('/taskList');
+            Util::redirect('/');
     }
 }
