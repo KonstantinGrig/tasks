@@ -36,6 +36,30 @@ $(document).ready(function(){
         }
     };
 
+    $('#blah').on('click', function() {
+        console.log("click blah");
+        simulateClick();
+    });
+    $('#image').on('click' , function(){
+        console.log("click image");
+    });
+    function simulateClick() {
+        var event = new MouseEvent('click', {
+            'view': window,
+            'bubbles': true,
+            'cancelable': true
+        });
+        var cb = document.getElementById('image');
+        var canceled = !cb.dispatchEvent(event);
+        if (canceled) {
+            // A handler called preventDefault.
+            console.log("canceled");
+        } else {
+            // None of the handlers called preventDefault.
+            console.log("not canceled");
+        }
+    }
+
     $('#createTaskButton').on('click', function() {
         $.ajax({
             url: '/taskCreate',
