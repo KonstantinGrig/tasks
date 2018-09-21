@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Создание задачи{% endblock %}
+
+{% block content %}
+<div class="form-task">
+    <a href="/">Назад к списку</a>
+    <h1>Создание задачи</h1>
+        <form method="post" enctype="multipart/form-data" action="/taskCreate" id="createTaskForm">
+            <div class="form-group">
+                <label for="userName">Имя пользователя:</label>
+                <input type="text" class="form-control" id="userName" name="userName">
+                <div class="invalid-feedback" id="userName-invalid-feedback">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" id="email" name="email">
+                <div class="invalid-feedback" id="email-invalid-feedback">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="text">Текст задачи:</label>
+                <input type="text" class="form-control" id="text" name="text">
+                <div class="invalid-feedback" id="text-invalid-feedback">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="image">Изображение:</label>
+                <input id="image" name="image" type="file" class="is-invalid" />
+                <img id="blah" src="#" />
+                <div class="invalid-feedback" id="image-invalid-feedback">
+                </div>
+            </div>
+
+            <button id="createTaskButton" type="button" class="btn btn-primary">Отправить</button>
+        </form>
+</div>
+
+{% endblock %}

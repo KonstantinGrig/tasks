@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Список задач{% endblock %}
+
+{% block content %}
+<div class="form-list">
+    {% if model.current_user == 'anonymous' %}
+    <!--<div class="button-group">-->
+    <!--<a href="/loginform" class="float-right">Войти</a>-->
+    <!--</div>-->
+    <div class="btn-group float-right" role="group">
+        <form method="get" action="/loginform">
+            <button type="button" class="btn btn-secondary">Привет аноним!</button>
+            <button type="submit" class="btn btn-primary">Вoйти</button>
+        </form>
+    </div>
+    {% else %}
+    <!--<p class="float-right">Привет {{model.current_user}} </p>-->
+    <!--<p><a href="/logout" class="float-right">Выйти</a></p>-->
+    <div class="btn-group float-right" role="group">
+        <form method="get" action="/logout">
+        <button type="button" class="btn btn-secondary">Привет {{model.current_user}}!</button>
+        <button type="submit" class="btn btn-primary">Выйти</button>
+        </form>
+    </div>
+    {% endif %}
+    <h1>Список задач</h1>
+
+    <div class="button-group">
+        <form method="get" action="/taskcreateform">
+            <button type="submit" class="btn btn-lg btn-block btn-warning">Создать новую задачу</button>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>id
+                    {% if model.order == 'id' and model.direction == 'ASC' %}
+                    <span class="fa fa-arrow-down"></span>
+                    {% endif %}
+                    {% if model.order == 'id' and model.direction == 'DESC' %}
+                    <span class="fa fa-arrow-up"></span>
+                    {% endif %}
+                </th>
+                <th>
+                    {% if model.order == 'userName' and model.direction == 'ASC' %}
+                        <a href="?order=userName&direction=DESC">Имя пользователя</a>
+                        <span class="fa fa-arrow-down"></span>
+                    {% elseif model.order == 'userName' and model.direction == 'DESC' %}
+                        <a href="?order=userName&direction=ASC">Имя пользователя</a>
+                    <span class="fa fa-arrow-up"></span>
+                    {% else %}
+                        <a href="?order=userName&direction=ASC">Имя пользователя</a>
+                    {% endif %}
+                </th>
+                <th>
+                    {% if model.order == 'email' and model.direction == 'ASC' %}
+                    <a href="?order=email&direction=DESC">Email</a>
+                    <span class="fa fa-arrow-down"></span>
+                    {% elseif model.order == 'email' and model.direction == 'DESC' %}
+                    <a href="?order=email&direction=ASC">Email</a>
+                    <span class="fa fa-arrow-up"></span>
+                    {% else %}
+                    <a href="?order=email&direction=ASC">Email</a>
+                    {% endif %}
+                </th>
+                <th>Текст</th>
+                <th>Изображение</th>
+                <th>
+                    {% if model.order == 'executed' and model.direction == 'ASC' %}
+                    <a href="?order=executed&direction=DESC">Выполнено</a>
+                    <span class="fa fa-arrow-up"></span>
+                    {% elseif model.order == 'executed' and model.direction == 'DESC' %}
+                    <a href="?order=executed&direction=ASC">Выполнено</a>
+                    <span class="fa fa-arrow-down"></span>
+                    {% else %}
+                    <a href="?order=executed&direction=ASC">Выполнено</a>
+                    {% endif %}
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in model.entityList %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.userName }}</td>
+                <td>{{ task.email }}</td>
+                <td><a href="/taskEditForm?id={{ task.id }}">{{ task.text }}</a></td>
+                <td> <img src="{{ task.imagePath }}" class="img-thumbnail" alt="Cinque Terre"> </td>
+                <td class="text-center">
+                    {% if task.executed == true %}
+                        <i class="fas fa-check"></i>
+                    {% else %}
+                        <i class="far fa-circle"></i>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="button-group">
+
+            <div class="form-group">
+                {% if (model.offset - model.limit) < 0 %}
+                    <button type="button" class="btn btn-lg btn-block btn-secondary"><<<</button>
+                {% else %}
+                    <form method="get" action="/">
+                        <input type="hidden" name="order" value="{{ model.order }}" />
+                        <input type="hidden" name="direction" value="{{ model.direction }}" />
+                        <input type="hidden" name="offset" value="{{ model.offset - model.limit }}" />
+                        <input type="hidden" name="limit" value="{{ model.limit }}" />
+                        <button type="submit" class="btn btn-lg btn-block btn-primary"><<<</button>
+                    </form>
+                {% endif %}
+            </div>
+
+            {% if (model.offset + model.limit) > model.totalRecords %}
+            <button type="button" class="btn btn-lg btn-block btn-secondary">>>></button>
+            {% else %}
+            <form method="get" action="/">
+                <input type="hidden" name="order" value="{{ model.order }}" />
+                <input type="hidden" name="direction" value="{{ model.direction }}" />
+                <input type="hidden" name="offset" value="{{ model.offset + model.limit }}" />
+                <input type="hidden" name="limit" value="{{ model.limit }}" />
+                <button type="submit" class="btn btn-lg btn-block btn-primary">>>></button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

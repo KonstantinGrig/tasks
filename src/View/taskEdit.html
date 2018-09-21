@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Редактирование задачи{% endblock %}
+
+{% block content %}
+<div class="form-task">
+    <a href="/">Назад к списку</a>
+    <h1>Редактирование задачи</h1>
+
+    <form method="post" enctype="multipart/form-data" action="/taskEdit">
+        <input type="hidden" name="id" value="{{ model.entity.id }}" />
+        <div class="form-group">
+            <label>Имя пользователя:</label>
+            <label>{{ model.entity.userName }}</label>
+        </div>
+        <div class="form-group">
+            <label>Email address:</label>
+            <label>{{ model.entity.email }}</label>
+        </div>
+        <div class="form-group">
+            <label for="text">Текст задачи:</label>
+            <input type="text" class="form-control" id="text" name="text" value="{{ model.entity.text }}">
+            <div class="invalid-feedback" id="text-invalid-feedback">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="executed">Выполнена:</label>
+            {% if model.entity.executed == true %}
+            <input type="checkbox" id="executed" name="executed" checked>
+            {% else %}
+            <input type="checkbox" id="executed" name="executed">
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <img id="blah" src="{{ model.entity.imagePath }}" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+</div>
+
+{% endblock %}
