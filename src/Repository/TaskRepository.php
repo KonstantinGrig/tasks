@@ -7,7 +7,7 @@ namespace App\Repository;
 use App\Config\Config;
 use App\Entity\Task;
 
-class TaskRepository
+class TaskRepository implements TaskRepositoryInterface
 {
     public function insert(Task $task)
     {

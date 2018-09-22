@@ -115,7 +115,7 @@
                 {% endif %}
             </div>
 
-            {% if (model.offset + model.limit) > model.totalRecords %}
+            {% if (model.offset + model.limit) >= model.totalRecords %}
             <button type="button" class="btn btn-lg btn-block btn-secondary">>>></button>
             {% else %}
             <form method="get" action="/">

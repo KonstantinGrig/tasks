@@ -7,7 +7,7 @@ namespace App\Model;
 use App\Core\Request;
 use App\Core\Util;
 use App\Entity\Task;
-use App\Repository\TaskRepository;
+use App\Repository\TaskRepositoryInterface;
 
 class TaskModel extends BaseModel implements ModelInterface
 {
@@ -15,6 +15,17 @@ class TaskModel extends BaseModel implements ModelInterface
     const ALLOW_IMAGE_HEIGHT = 240;
     const ALLOW_IMAGE_TYPES = ["image/png", "image/jpeg", "image/gif"];
     const ERROR_MESSAGE_IMAGE_TYPES = "Разрешены только JPG/GIF/PNG";
+
+    /**
+     * @var TaskRepositoryInterface
+     */
+    private $taskRepository;
+
+    public function __construct(TaskRepositoryInterface $taskRepository)
+    {
+        parent::__construct();
+        $this->taskRepository = $taskRepository;
+    }
 
     /**
      * Resolve entity from Post And File
@@ -75,8 +86,7 @@ class TaskModel extends BaseModel implements ModelInterface
 
         $entity = $this->entity;
         $entity->imagePath = $imageUrl;
-        $taskRepository = new TaskRepository();
-        $taskRepository->insert($entity);
+        $this->taskRepository->insert($entity);
     }
 
     public function fillModelForTaskList(array $query)
@@ -85,7 +95,6 @@ class TaskModel extends BaseModel implements ModelInterface
         $this->direction = 'ASC';
         $this->offset = 0;
         $this->limit = 3;
-        $taskRepository = new TaskRepository();
         if (isset($query['order']) && Util::hasClassProperty(Task::class, $query['order'])) {
             $this->order = $query['order'];
         }
@@ -98,17 +107,16 @@ class TaskModel extends BaseModel implements ModelInterface
         if (isset($query['limit'])) {
             $this->limit = (int)$query['limit'];
         }
-        $tasks = $taskRepository->ordered($this->order, $this->direction, $this->offset, $this->limit);
+        $tasks = $this->taskRepository->ordered($this->order, $this->direction, $this->offset, $this->limit);
         if (count($tasks) > 0) {
             $this->entityList = $tasks;
         }
-        $this->totalRecords = $taskRepository->totalRecords();
+        $this->totalRecords = $this->taskRepository->totalRecords();
     }
 
     public function fillModelById(int $id)
     {
-        $taskRepository = new TaskRepository();
-        $task = $taskRepository->findById($id);
+        $task = $this->taskRepository->findById($id);
         $this->entity = $task;
     }
     public function fillModelForTaskUpdate($post)
@@ -131,8 +139,7 @@ class TaskModel extends BaseModel implements ModelInterface
     public function updateEntityFromModel()
     {
         if (isset($this->entity)) {
-            $taskRepository = new TaskRepository();
-            $taskRepository->update($this->entity);
+            $this->taskRepository->update($this->entity);
         }
     }
 

@@ -8,6 +8,7 @@ use App\Core\Request;
 use App\Core\Response;
 use App\Core\Util;
 use App\Model\TaskModel;
+use App\Repository\TaskRepository;
 
 
 class TaskController extends BaseController
@@ -15,7 +16,7 @@ class TaskController extends BaseController
 
     public function taskList(Request $request): Response
     {
-        $model = new TaskModel();
+        $model = new TaskModel(new TaskRepository());
         $model->fillModelForTaskList($request->queryArray);
 
         return new Response($this->twig->render('taskList.html', ['model' => $model]));
@@ -28,7 +29,7 @@ class TaskController extends BaseController
 
     public function taskCreate(Request $request): Response
     {
-        $model = new TaskModel();
+        $model = new TaskModel(new TaskRepository());
         $model->fillModelForTaskCreate($request);
 
         if ($model->isErrors() || !$model->validate()) {
@@ -49,7 +50,7 @@ class TaskController extends BaseController
         if (!$request->queryArray['id']) {
             Util::redirect('/');
         }
-        $model = new TaskModel();
+        $model = new TaskModel(new TaskRepository());
         $model->fillModelById($request->queryArray['id']);
         return new Response($this->twig->render('taskEdit.html', ['model' => $model]));
     }
@@ -60,7 +61,7 @@ class TaskController extends BaseController
         if ($currentUser != 'admin') {
             Util::redirect('/deny');
         }
-        $model = new TaskModel();
+        $model = new TaskModel(new TaskRepository());
         $model->fillModelForTaskUpdate($request->post);
         $model->updateEntityFromModel();
         Util::redirect('/');
