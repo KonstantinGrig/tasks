@@ -19,6 +19,12 @@ $(document).ready(function(){
         readURL(this);
     });
 
+    $('#previewButton').on('click', function() {
+        $('#modalUserName').html($('#userName').val());
+        $('#modalEmail').html($('#email').val());
+        $('#modalText').html($('#text').val());
+        $('#modalBlah').attr('src', $('#blah').attr('src'));
+    });
 
     showErrors = function(errors) {
         if(typeof errors.errors !== 'undefined' && typeof errors.errors.entity !== 'undefined') {
@@ -37,19 +43,15 @@ $(document).ready(function(){
     };
 
     $('#blah').on('click', function() {
-        console.log("click blah");
-        simulateClick();
+        simulateClick('image');
     });
-    $('#image').on('click' , function(){
-        console.log("click image");
-    });
-    function simulateClick() {
+    function simulateClick(elementId) {
         let event = new MouseEvent('click', {
             'view': window,
             'bubbles': true,
             'cancelable': true
         });
-        let cb = document.getElementById('image');
+        let cb = document.getElementById(elementId);
         cb.dispatchEvent(event);
     }
 

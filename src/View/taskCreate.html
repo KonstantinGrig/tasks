@@ -26,14 +26,40 @@
                 </div>
             </div>
             <div class="form-group text-center">
-                <input id="image" name="image" type="file" class="is-invalid" accept=".gif, .jpeg, .png" hidden />
-                <img id="blah" src="/img/q5.png" class="float-center" title="Нажмите чтобы изменить" />
+                <input id="image" name="image" type="file" class="is-invalid" accept=".gif, .jpeg, .jpg, .png" hidden />
+                <img id="blah" src="/img/q5.png" class="float-center" width="auto" height="240px" title="Нажмите чтобы изменить" />
                 <div class="invalid-feedback" id="image-invalid-feedback">
                 </div>
             </div>
 
+            <button id="previewButton" type="button" class="btn btn-warning" data-toggle="modal" data-target="#previewModal">
+                Предварительный просмотр
+            </button>
             <button id="createTaskButton" type="button" class="btn btn-primary">Отправить</button>
         </form>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Просмотр задачи</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Имя пользователя: <label id="modalUserName"></label></p>
+                <p>Email: <label id="modalEmail"></label></p>
+                <p>Текст задачи: <label id="modalText"></label></p>
+                <div class="form-group text-center"><img id="modalBlah" width="320px" height=auto /></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
