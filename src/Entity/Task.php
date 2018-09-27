@@ -45,7 +45,7 @@ class Task
         return [
             "userName" => [
                 "validator" => RespectValidator::length(3, 15),
-                "message" => "Имя пользователя не должно содержать пробелов, длина должа быть 1-15 симворлов"
+                "message" => "Имя пользователя не должно содержать пробелов, длина должа быть 3-15 симворлов"
             ],
             "email" => [
                 "validator" => RespectValidator::email(),

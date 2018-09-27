@@ -3,7 +3,6 @@
 *.iml
 *.ipr
 vendor/
-docker/
 data/tasks_dev.sqlite3
 data/tasks_test.sqlite3
 dayside/

@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+
+  nginx:
+    image: nginx:1.15.3-alpine
+    ports:
+    - 80:80
+    volumes:
+    - ./nginx/sites-enabled:/etc/nginx/conf.d
+    - ../:/app
+    working_dir: /app
+    restart: always
+    container_name: 'demo1_nginx'
+
+  fpm:
+    build: fpm
+    container_name: 'demo1_php_fpm'
+    working_dir: /app
+    restart: always
+    environment:
+      XDEBUG_CONFIG: "remote_host=192.168.0.101 remote_port=9000 remote_enable=1"
+    volumes:
+    - ../:/app
+    - /tmp:/tmp
