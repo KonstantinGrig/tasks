@@ -87,7 +87,7 @@
                 <td>{{ task.userName }}</td>
                 <td>{{ task.email }}</td>
                 <td><a href="/taskEditForm?id={{ task.id }}">{{ task.text }}</a></td>
-                <td> <img src="{{ task.imagePath }}" class="img-thumbnail" alt="Cinque Terre"> </td>
+                <td> <img src="{{ task.imagePath }}" class="img-thumbnail"> </td>
                 <td class="text-center">
                     {% if task.executed == true %}
                         <i class="fas fa-check"></i>
