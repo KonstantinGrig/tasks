@@ -1,3 +1,3 @@
 # Simple tasks list
 
-http://exchangesumo/?ref=1
+Simple tasks list on clear PHP
